@@ -38,9 +38,7 @@ public class Animal {
             case SOUTH -> "v";
             case WEST -> "<";
         };
-
-    }
-
+      
     public void move(MoveDirector director) {
         switch (director) {
             case RIGHT -> this.orientation = orientation.next();
@@ -50,14 +48,12 @@ public class Animal {
                 if(this.map.canMoveTo(newposition)){
                     this.position = newposition;
                 }
-
             }
             case BACKWARD -> {
                 Vector2d newposition = this.position.subtract(this.orientation.toUnitVector());
                 if(this.map.canMoveTo(newposition)){
                     this.position = newposition;
                 }
-
             }
         }
     }
