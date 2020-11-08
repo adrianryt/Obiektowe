@@ -38,6 +38,7 @@ public class Animal {
             case SOUTH -> "v";
             case WEST -> "<";
         };
+    }
       
     public void move(MoveDirector director) {
         switch (director) {
