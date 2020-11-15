@@ -67,7 +67,7 @@ class Vector2dTest {
         //given
         Vector2d vector1 = new Vector2d(1, 2);
         Vector2d vector2 = new Vector2d(-1, 3);
-        Vector2d vector3 = new Vector2d(-1,2    );
+        Vector2d vector3 = new Vector2d(-1,2 );
         //when
         Vector2d result1 = vector1.lowerLeft(vector2);
         Vector2d result2 = vector2.lowerLeft(vector3);
