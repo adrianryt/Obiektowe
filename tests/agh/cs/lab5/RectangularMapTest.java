@@ -67,10 +67,8 @@ class RectangularMapTest {
         Animal nutka1 = new Animal(map, new Vector2d(6,4));
         Animal nutka2 = new Animal(map, new Vector2d(-2,4));
         //when
-        map.add(nutka1);
-        map.add(nutka2);
         //then
-        assertEquals(0,((RectangularMap) map).getAnimals().size());
+        assertThrows(IllegalArgumentException.class,() ->{ map.add(nutka2); });
     }
     @Test
     void addToOccupatedPosition() {
@@ -79,10 +77,9 @@ class RectangularMapTest {
         Animal nutka1 = new Animal(map, new Vector2d(4,4));
         map.add(nutka1);
         Animal nutka2 = new Animal(map, new Vector2d(4,4));
-        //when
-        map.add(nutka2);
+        //whe
         //then
-        assertEquals(1,((RectangularMap) map).getAnimals().size());
+        assertThrows(IllegalArgumentException.class,() ->{ map.add(nutka2); });
     }
     @Test
     void addGood() {

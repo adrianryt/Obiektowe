@@ -70,9 +70,8 @@ class GrassFieldTest {
         map.add(nutka1);
         Animal nutka2 = new Animal(map, new Vector2d(4,4));
         //when
-        map.add(nutka2);
         //then
-        assertEquals(1,((GrassField) map).getAnimals().size());
+        assertThrows(IllegalArgumentException.class,() ->{ map.add(nutka2); });
     }
     @Test
     void addGood() {

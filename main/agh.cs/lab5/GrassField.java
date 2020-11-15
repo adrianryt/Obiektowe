@@ -3,15 +3,14 @@ package agh.cs.lab5;
 import agh.cs.lab2.Vector2d;
 import agh.cs.lab3.Animal;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
+
 import static java.lang.Math.*;
 
 public class GrassField extends AbstractWorldMap {
 
     private final List<Grass> grass = new LinkedList<>();
+    protected Map<Vector2d,Grass> hashGrass= new HashMap<>();
 
     public List<Grass> getGrass() {
         return grass;
@@ -33,6 +32,7 @@ public class GrassField extends AbstractWorldMap {
             Vector2d next = new Vector2d(generator.nextInt((int) sqrt(n*10) +1 ),generator.nextInt((int) sqrt(n*10) + 1));
             if(checkGrass(next)){
                 grass.add(new Grass(next));
+                hashGrass.put(next,new Grass(next));
             }
             else {
                 i--;
@@ -41,10 +41,8 @@ public class GrassField extends AbstractWorldMap {
     }
 
     private boolean checkGrass(Vector2d next) {
-        for(Grass grass: grass){
-            if(next.equals(grass.getPosition())){
-                return false;
-            }
+        if(hashGrass.containsKey(next)) {
+            return false;
         }
         return true;
     }
@@ -73,10 +71,8 @@ public class GrassField extends AbstractWorldMap {
 
     @Override
     public boolean canMoveTo(Vector2d position) {
-        for(Animal animal: animals){
-            if(animal.getPosition().equals(position)){
-                return false;
-            }
+        if(hashAnimals.containsKey(position)){
+            return false;
         }
 
         if(position.x >= 0 && position.y >= 0 && position.x <= Integer.MAX_VALUE  && position.y <= Integer.MAX_VALUE){
@@ -88,10 +84,8 @@ public class GrassField extends AbstractWorldMap {
 
     @Override
     public boolean place(Animal nutka) {
-        for(Animal animal: animals){
-            if(animal.getPosition().equals(nutka.getPosition())){
-                return false;
-            }
+        if(hashAnimals.containsKey(nutka.getPosition())){
+                throw new IllegalArgumentException(nutka.getPosition().toString() + "this place is taken");
         }
 
         return true;
@@ -99,30 +93,24 @@ public class GrassField extends AbstractWorldMap {
 
     @Override
     public boolean isOccupied(Vector2d position) {
-        for(Animal animal: animals){
-            if(animal.getPosition().equals(position)){
-                return true;
-            }
+        if(hashAnimals.containsKey(position)){
+            return true;
         }
-        for(Grass grass: grass){
-            if(grass.getPosition().equals(position)){
-                return true;
-            }
+        if(hashGrass.containsKey(position)) {
+            return true;
         }
         return false;
     }
 
     @Override
     public Optional<Object> objectAt(Vector2d position) {
-        for(Animal animal: animals) {
-            if (animal.getPosition().equals(position)) {
-                return Optional.of(animal);
-            }
+        if(hashAnimals.containsKey(position)){
+            return Optional.of(hashAnimals.get(position));
         }
-        for(Grass grass: grass){
-            if(grass.getPosition().equals(position) ){
-                return Optional.of(grass);
+
+        if(hashGrass.containsKey(position)) {
+                return Optional.of(hashGrass.get(position));
             }
-        }return Optional.empty();
+        return Optional.empty();
     }
 }
