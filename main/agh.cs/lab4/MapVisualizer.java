@@ -2,6 +2,8 @@ package agh.cs.lab4;
 
 import agh.cs.lab2.Vector2d;
 
+import java.util.Optional;
+
 /**
  * The map visualizer converts the {@link IWorldMap} map into a string
  * representation.
@@ -72,14 +74,10 @@ public class MapVisualizer {
     }
 
     private String drawObject(Vector2d currentPosition) {
-        String result = null;
+        String result;
         if (this.map.isOccupied(currentPosition)) {
-            Object object = this.map.objectAt(currentPosition);
-            if (object != null) {
-                result = object.toString();
-            } else {
-                result = EMPTY_CELL;
-            }
+            Optional <Object> object = this.map.objectAt(currentPosition);
+           result = object.orElse(EMPTY_CELL).toString();
         } else {
             result = EMPTY_CELL;
         }

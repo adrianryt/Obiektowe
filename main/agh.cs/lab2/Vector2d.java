@@ -3,8 +3,8 @@ package agh.cs.lab2;
 import java.util.Objects;
 
 public class Vector2d {
-    final int x;
-    final int y;
+    final public int x;
+    final public int y;
 
     public Vector2d(int x, int y) {
         this.x = x;
@@ -61,12 +61,15 @@ public class Vector2d {
         return false;
     }
 
-    public int hashCode() {
-        return Objects.hash(x, y);
-    }
-
     public Vector2d opposite(){
         Vector2d result = new Vector2d((-this.x),(-this.y));
         return result;
+    }
+    @Override
+    public int hashCode() {
+        int hash = 13;
+        hash += this.x * 31;
+        hash += this.y * 17;
+        return hash;
     }
 }
