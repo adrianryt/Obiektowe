@@ -2,6 +2,7 @@ package agh.cs.lab5;
 
 import agh.cs.lab2.Vector2d;
 import agh.cs.lab3.Animal;
+import agh.cs.lab7.MapBoundary;
 
 import java.util.*;
 
@@ -18,11 +19,7 @@ public class GrassField extends AbstractWorldMap {
 
     public GrassField(int grassNum){
         placeGrass(grassNum);
-    }
-
-    @Override
-    public Vector2d rightUpCorner(){
-        return getRightUpCorner();
+        mapBoundary = new MapBoundary((HashMap<Vector2d, Grass>) hashGrass);
     }
 
 
@@ -45,28 +42,6 @@ public class GrassField extends AbstractWorldMap {
             return false;
         }
         return true;
-    }
-
-    private Vector2d getRightUpCorner(){
-        int maksx = 0;
-        int maksy = 0;
-        for( Animal animal: this.animals){
-            if(animal.getPosition().x >maksx){
-                maksx = animal.getPosition().x;
-            }
-            if(animal.getPosition().y >maksy){
-                maksy = animal.getPosition().y;
-            }
-        }
-        for( Grass grass: grass){
-            if(grass.getPosition().x >maksx){
-                maksx = grass.getPosition().x;
-            }
-            if(grass.getPosition().y >maksy){
-                maksy = grass.getPosition().y;
-            }
-        }
-        return new Vector2d(maksx,maksy);
     }
 
     @Override
