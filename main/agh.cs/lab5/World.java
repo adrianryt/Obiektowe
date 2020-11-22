@@ -18,7 +18,7 @@ public class World {
             map.add(new Animal(map, new Vector2d(4, 5)));
             map.add(new Animal(map, new Vector2d(6, 7)));
             map.add(new Animal(map, new Vector2d(2, 6)));
-            map.add(new Animal(map, new Vector2d(7, 5)));
+            map.add(new Animal(map, new Vector2d(11, 5)));
             map.run(directions);
             System.out.println(map.toString());
         }
